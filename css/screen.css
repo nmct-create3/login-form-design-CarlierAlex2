@@ -1,13 +1,50 @@
 /*------------------------------------*\
 #FONTS
 \*------------------------------------*/
+@font-face {
+    font-family: "Inter";
+    font-weight: 400;
+    src: url("../fonts/Inter-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Inter";
+    font-weight: 600;
+    src: url("../fonts/Inter-SemiBold.woff2") format("woff2");
+}
+
 
 /*------------------------------------*\
 #Variables
 \*------------------------------------*/
 
 :root {
+    --global-color-alpha-light: #4F95FF;
+    --global-color-alpha: #3385FF;
+    --global-color-alpha-dark: #2E77E6;
+    --global-color-transparent:#3385ffbf;
+    --global-color-x-transparent: #3385ff4d;
 
+    --global-color-neutral-xxxx-light: #F5F6FA;
+    --global-color-neutral-xxx-light: #E2E3E7;
+    --global-color-neutral-xx-light: #CACCD4;
+    --global-color-neutral-x-light: #B5B6C0;
+    --global-color-neutral-light: #A0A1AD;
+    --global-color-neutral: #8B8C9A;
+    --global-color-neutral-dark: #757787;
+    --global-color-neutral-x-dark: #606274;
+    --global-color-neutral-xx-dark: #4B4C60;
+    --global-color-neutral-xxx-dark: #35374D;
+    --global-color-neutral-xxxx-dark: #20223A;
+
+    --global-baseline: 8px;
+    --global-whitespace-xs:     calc(var(--global-baseline) / 2);       /* = 4px */
+    --global-whitespace-sm:     calc(var(--global-baseline) );          /* = 8px */
+    --global-whitespace-md:     calc(var(--global-baseline) * 2);       /* = 16px */
+    --global-whitespace:        calc(var(--global-baseline) * 3);       /* = 24px */
+    --global-whitespace-lg:     calc(var(--global-whitespace-md) * 2);  /* = 32px */
+    --global-whitespace-xl:     calc(var(--global-whitespace) * 2);     /* = 48px */
+    --global-whitespace-xxl:    calc(var(--global-baseline-xl) * 2);    /* = 72px */
 }
 
 /* CSS variables here */
@@ -25,13 +62,15 @@
 html {
     font-size: 16px;
     line-height: 1.5;
-    font-family: Helvetica, arial, sans-serif;
-    color: grey;
+    font-family: "Inter", Helvetica, arial, sans-serif;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background-color: white;
+
+    color: var(--global-color-neutral-xxxx-dark);
+    background-color: var(--global-color-neutral-xxxx-light);
 }
+
 
 *,
 *:before,
@@ -47,13 +86,13 @@ html {
 */
 
 ::-moz-selection {
-    background: HotPink;
+    background: #3385FF;
     color: white;
     text-shadow: none;
 }
 
 ::selection {
-    background: HotPink;
+    background: #3385FF;
     color: white;
     text-shadow: none;
 }
@@ -88,19 +127,19 @@ h3 {
 h1 {
     font-size: 36px;
     line-height: 48px;
-    margin: 0 0 24px;
+    margin: 0 0 var(--global-whitespace);
 }
 
 h2 {
     font-size: 32px;
     line-height: 40px;
-    margin: 0 0 24px;
+    margin: 0 0 var(--global-whitespace);
 }
 
 h3 {
     font-size: 26px;
     line-height: 32px;
-    margin: 0 0 24px;
+    margin: 0 0 var(--global-whitespace);
 }
 
 h4,
@@ -108,7 +147,7 @@ h5,
 h6 {
     font-size: 20px;
     line-height: 24px;
-    margin: 0 0 24px;
+    margin: 0 0 var(--global-whitespace);
 }
 
 p,
@@ -118,7 +157,7 @@ dl,
 table,
 address,
 figure {
-    margin: 0 0 24px;
+    margin: 0 0 var(--global-whitespace);
 }
 
 ul,
@@ -135,7 +174,7 @@ blockquote {
     font-style: normal;
     font-size: 23px;
     line-height: 32px;
-    margin: 0 0 24px;
+    margin: 0 0 var(--global-whitespace);
 }
 
 blockquote * {
@@ -154,22 +193,28 @@ hr {
     border: 0;
     height: 1px;
     background: LightGrey;
-    margin: 0 0 24px;
+    margin: 0 0 var(--global-whitespace);
 }
 
 a {
-    color: HotPink;
+    color: #3385FF;
     transition: all .1s ease-in-out;
 }
 
 a:visited,
 a:active {
-    color: HotPink;
+    color: var(--global-color-alpha);
 }
 
 a:hover,
 a:focus {
-    color: DeepPink;
+    color: var(--global-color-alpha-light);
+}
+
+label,
+input{
+    display: block;
+    font-family: inherit; /*zorgt dat font overerft, input niet standaard*/
 }
 
 /*------------------------------------*\
@@ -215,6 +260,13 @@ a:focus {
         padding-top: 96px;
         padding-bottom: 72px;
     }
+}
+
+.o-row--login {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /*
@@ -406,6 +458,7 @@ a:focus {
     width: auto;
     overflow: visible;
     background: transparent;
+    outline: none;
 
     /* inherit font & color from ancestor */
     color: inherit;
@@ -444,6 +497,30 @@ a:focus {
     Everything form related here
 */
 
+.c-card{
+    background-color: white;
+    border: 1px solid #0000000d;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px #00000012; 
+}
+
+.c-card__body{
+    padding: 48px;
+    padding-bottom: 24px;
+}
+
+.c-card__title{
+    text-align: center;
+    padding: 48px;
+    padding-bottom: 0;
+}
+
+.c-card__footer{
+    text-align: center;
+    padding: 24px 0 0 0;
+    border-top: 2px solid var(--global-color-neutral-xxx-light);
+}
+
 /*
     Component: Input
     ---
@@ -451,10 +528,29 @@ a:focus {
 */
 
 .c-input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 
+    width: 100%;
+    border-radius: 3px;
+    border: 1px solid var(--global-color-neutral-xxx-light);
+    border-radius: 3px;
+
+    background-color: #FFFFFF;
+    color: var(--global-color-neutral-xxxx-dark);
+
+    font-size: 16px;
+    line-height: 24px;
+
+    padding: 14px;
 }
 
 .c-input:focus {
+    outline: none;
+    border-color: #3385FF;
+    box-shadow: h-offset v-offset blur spread color;
+    box-shadow: 0 0 0 3px var(--global-color-transparent); 
 }
 
 /*
@@ -464,13 +560,33 @@ a:focus {
 */
 
 .c-label {
+    font-size: 14px;
+    line-height: 16px;
+    margin-bottom: 8px;
+    color: var(--global-color-neutral-x-dark);
+}
 
+.c-label--option {
+    margin-bottom: 0;
+    margin-left: 8px;
 }
 
 /* If a input is focused within the form-field class change te color of the label */
 
 .c-form-field:focus-within .c-label {
 
+}
+
+.c-form-field{
+
+}
+
+.c-form-field--option {
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
 
 /*
@@ -480,24 +596,68 @@ a:focus {
 */
 
 .c-button {
+    background-color: #3385FF;
+    color: #FFFFFF;
 
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+
+    border: 1px solid #2E77E6;
+    border-radius: 3px;
+    padding: 14px 0;
+
+    display: block;
+    width: 100%;
 }
 
 .c-button:hover {
-
+    background-color: #4F95FF;
 }
 
 .c-button:focus {
-
+    box-shadow: 0 0 0 3px var(--global-color-transparent); 
 }
 
 .c-button:active {
-
+    background-color: #2E77E6;
 }
 
 .c-button--block {
 
 }
+
+
+/*
+    Component: logo
+    ---
+*/
+
+.c-logo {
+    height: 24px;
+}
+
+.c-logo__symbol {
+    height: 100%;
+    display: block;
+}
+
+.c-logo__path {
+
+}
+
+.c-logo__path--1 {
+    fill: var(--global-color-neutral-xxxx-dark);
+}
+
+.c-logo__path--2 {
+    fill: #3385FF;
+}
+
+.c-logo__path--3 {
+    fill: #1B4186;
+}
+
 
 /*------------------------------------*\
 #UTILITIES
